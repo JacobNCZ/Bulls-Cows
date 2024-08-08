@@ -18,7 +18,7 @@ guess_counter = 0
 start = None
 game_statistics = []
 game_counter = 0
-number = None
+final_number = None
 
 
 # Funkce pro správnou gramatiku při vyhodnocení.
@@ -39,14 +39,18 @@ Enter a number:
 -----------------------------------------------''')
 
 while lets_continue != "no":
-    # Vygenerování 4 místného čísla.
     if guess_counter == 0:
+        # Vygenerování 4 místného čísla.
+        first_number = random.randint(1, 9)
+        rest_numbers = list(range(10))
+        rest_numbers.remove(first_number)
+        last_three = (random.sample(rest_numbers, 3))
+        last_three.insert(0, first_number)
+        final_number = ''.join(map(str, last_three))
+        print(final_number)
+
+        # Měření času
         start = time.time()
-        number = str(random.randint(1, 9))
-        while len(number) != 4:
-            next_char = str(random.randint(0, 9))
-            if (next_char in number) is False:
-                number += next_char
 
 # Kontrola vstupních dat dle zadaných parametrů.
     wrong_input = False
@@ -94,10 +98,10 @@ while lets_continue != "no":
         bull_counter = 0
         cow_counter = 0
 
-        for _ in range(0, 4):
-            if player_guess[_] == number[_]:
+        for pozice in range(0, 4):
+            if player_guess[pozice] == final_number[pozice]:
                 bull_counter += 1
-            elif player_guess[_] in number:
+            elif player_guess[pozice] in final_number:
                 cow_counter += 1
 
         # Počítadlo tipů.
@@ -105,7 +109,7 @@ while lets_continue != "no":
         guess = grammar(guess_counter, "guess", "guesses")
 
         # Slovní ohodnocení hry.
-        if player_guess == number:
+        if player_guess == final_number:
             if guess_counter <= 10:
                 result = "perfect"
             elif guess_counter > 10:
