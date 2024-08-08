@@ -20,6 +20,15 @@ game_statistics = []
 game_counter = 0
 number = None
 
+
+# Funkce pro správnou gramatiku při vyhodnocení.
+def grammar(counter, singular, plural):
+    if counter == 1:
+        return singular
+    else:
+        return plural
+
+
 # Pozdrav uživatele a vypsání úvodního textu.
 print('''Hi there!
 -----------------------------------------------
@@ -90,13 +99,6 @@ while lets_continue != "no":
                 bull_counter += 1
             elif player_guess[_] in number:
                 cow_counter += 1
-
-        # Funkce pro správnou gramatiku při vyhodnocení.
-        def grammar(counter, singular, plural):
-            if counter == 1:
-                return singular
-            else:
-                return plural
 
         # Počítadlo tipů.
         guess_counter += 1
