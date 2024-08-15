@@ -65,21 +65,9 @@ while lets_continue != "no":
 
     # Kontrola duplicity vložených číslic.
     if len(player_guess) == 4:
-        index_i = -1
-        for i in player_guess:
-            index_i += 1
-            index_y = -1
-            for y in player_guess:
-                index_y += 1
-                if i == y and index_i != index_y and (47 < ord(y) < 57):
-                    print("There cannot be duplicity numeric characters!")
-                    wrong_input = True
-                    break
-                else:
-                    continue
-            else:
-                continue
-            break
+        if len(list(player_guess)) != len(set(player_guess)):
+            print("There cannot be duplicity numeric characters!")
+            wrong_input = True
 
         # Kontrola splnění podmínky začátku čísla - nesmí obsahovat nulu.
         if player_guess[0] == "0":
