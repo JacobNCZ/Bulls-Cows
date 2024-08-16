@@ -21,9 +21,21 @@ game_counter = 0
 final_number = None
 
 
+# Funkce na vygenerování 4-místného čísla.
+def number_generator():
+    first_number = random.randint(1, 9)
+    rest_numbers = list(range(10))
+    rest_numbers.remove(first_number)
+    last_three = (random.sample(rest_numbers, 3))
+    last_three.insert(0, first_number)
+    number = ''.join(map(str, last_three))
+    return number
+
+
 # Funkce kontroly duplicity vložených číslic.
 def duplicity_check(number):
     return bool(len(list(number)) != len(set(number)))
+
 
 # Funkce pro správnou gramatiku při vyhodnocení.
 def grammar(counter, singular, plural):
@@ -44,13 +56,8 @@ Enter a number:
 
 while lets_continue != "no":
     if guess_counter == 0:
-        # Vygenerování 4 místného čísla.
-        first_number = random.randint(1, 9)
-        rest_numbers = list(range(10))
-        rest_numbers.remove(first_number)
-        last_three = (random.sample(rest_numbers, 3))
-        last_three.insert(0, first_number)
-        final_number = ''.join(map(str, last_three))
+        # Spouštění funkce na vygenerování 4-místného čísla.
+        final_number = number_generator()
         print(final_number)
 
         # Měření času
