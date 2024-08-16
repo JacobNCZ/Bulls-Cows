@@ -21,6 +21,10 @@ game_counter = 0
 final_number = None
 
 
+# Funkce kontroly duplicity vložených číslic.
+def duplicity_check(number):
+    return bool(len(list(number)) != len(set(number)))
+
 # Funkce pro správnou gramatiku při vyhodnocení.
 def grammar(counter, singular, plural):
     if counter == 1:
@@ -65,7 +69,7 @@ while lets_continue != "no":
 
     # Kontrola duplicity vložených číslic.
     if len(player_guess) == 4:
-        if len(list(player_guess)) != len(set(player_guess)):
+        if duplicity_check(player_guess):
             print("There cannot be duplicity numeric characters!")
             wrong_input = True
 
